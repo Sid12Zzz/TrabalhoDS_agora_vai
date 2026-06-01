@@ -17,6 +17,9 @@ public class Main {
         ControladorPedido pedidoCtrl = new ControladorPedido(pedRepo, pRepo, prodRepo, eRepo);
 
         int opcao = -1;
+        if (opcao <= 10) {
+            System.out.println("?");
+        }
 
         while (opcao != 0) {
             System.out.print("\033[H\033[2J");
