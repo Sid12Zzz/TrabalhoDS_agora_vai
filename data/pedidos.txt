@@ -1,0 +1,23 @@
+
+6;Ricardo Almeida;04571-010;Placa de Vídeo RTX 3060:1:2499.9|Processador Intel i7:1:1899.9;4399.8
+7;Beatriz Santos;20040-002;Tablet Samsung S7:1:2899.9|Capa Teclado:1:349.9;3249.8
+8;Marcos Oliveira;30140-071;Impressora HP Laser:1:1249.9|Toner Reserva:2:459.8;1709.7
+9;Patrícia Rocha;70070-600;Kindle Paperwhite:1:649.9|Capa Magnética:1:89.9;739.8
+10;André Luiz Silva;40020-000;Roteador Wi-Fi 6:2:899.8|Cabo de Rede Cat6:5:125.0;1024.8
+11;Camila Xavier;60060-390;Smartphone iPhone 13:1:4999.9|Carregador MagSafe:1:299.9;5299.8
+12;Diego Ferreira;90010-240;Caixa de Som JBL:2:1199.8|Microfone Condensador:1:450.0;1649.8
+13;Letícia Gomes;69005-000;Smartwatch Apple:1:2499.9|Pulseira Extra:2:199.8;2699.7
+14;Felipe Barbosa;50010-000;Console PlayStation 5:1:4299.9|Controle DualSense:1:449.9;4749.8
+15;Gabriela Nunes;22041-001;Ar Condicionado Split:1:2199.9|Suporte de Parede:1:120.0;2319.9
+16;Hugo Viana;01414-000;Nobreak 1200VA:1:899.9|Protetor de Surto:3:149.7;1049.6
+17;Isabela Martins;11010-001;Scanner de Mesa:1:749.9|Papel A4 Resma:10:250.0;999.9
+18;Jorge Carvalho;31270-901;Projetor Full HD:1:3199.9|Tela de Projeção:1:450.0;3649.9
+19;Karina Lopes;74003-010;Docking Station USB-C:1:599.9|Hub USB 3.0:2:179.8;779.7
+20;Leonardo Pires;88010-000;Kit Upgrade AMD:1:1599.9|Memória RAM 16GB:2:699.8;2299.7
+21;Mariana Costa;66013-000;Mochila para Notebook:1:249.9|Mousepad Extra Grande:1:89.9;339.8
+22;Natan Souza;79002-000;HD Externo 2TB:1:459.9|Case de Proteção:1:45.0;504.9
+23;Olívia Mendes;57020-000;Luminária de Mesa LED:2:179.8|Organizador de Cabos:4:60.0;239.8
+24;Paulo Roberto;01223-000;Placa Mãe Asus:1:1199.9|Pasta Térmica Silver:2:70.0;1269.9
+25;Renata Silveira;20031-170;Suporte Monitor Articulado:2:599.8|Filtro de Linha:1:65.0;664.8
+
+80;Patrick Rodrigues;20780050;20:1:4299.9;4299.9

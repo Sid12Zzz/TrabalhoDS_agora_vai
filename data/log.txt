@@ -1,0 +1,61 @@
+2026-05-14T08:00:01.000000000 - Endereco cadastrado
+2026-05-14T08:00:01.100000000 - Pessoa cadastrada
+2026-05-14T08:00:02.000000000 - Endereco cadastrado
+2026-05-14T08:00:02.100000000 - Pessoa cadastrada
+2026-05-14T08:00:03.000000000 - Endereco cadastrado
+2026-05-14T08:00:03.100000000 - Pessoa cadastrada
+2026-05-14T08:00:04.000000000 - Endereco cadastrado
+2026-05-14T08:00:04.100000000 - Pessoa cadastrada
+2026-05-14T08:00:05.000000000 - Endereco cadastrado
+2026-05-14T08:00:05.100000000 - Endereco cadastrado
+2026-05-14T08:00:05.200000000 - Pessoa cadastrada
+2026-05-14T08:00:06.000000000 - Endereco cadastrado
+2026-05-14T08:00:06.100000000 - Endereco cadastrado
+2026-05-14T08:00:06.200000000 - Pessoa cadastrada
+2026-05-14T08:00:07.000000000 - Endereco cadastrado
+2026-05-14T08:00:07.100000000 - Pessoa cadastrada
+2026-05-14T08:00:08.000000000 - Endereco cadastrado
+2026-05-14T08:00:08.100000000 - Endereco cadastrado
+2026-05-14T08:00:08.200000000 - Pessoa cadastrada
+2026-05-14T08:00:09.000000000 - Produto cadastrado
+2026-05-14T08:00:09.100000000 - Produto cadastrado
+2026-05-14T08:00:09.200000000 - Produto cadastrado
+2026-05-14T08:00:09.300000000 - Produto cadastrado
+2026-05-14T08:00:09.400000000 - Produto cadastrado
+2026-05-14T08:00:09.500000000 - Produto cadastrado
+2026-05-14T08:00:09.600000000 - Produto cadastrado
+2026-05-14T08:00:09.700000000 - Produto cadastrado
+2026-05-14T08:00:09.800000000 - Produto cadastrado
+2026-05-14T08:00:09.900000000 - Produto cadastrado
+2026-05-14T08:00:10.000000000 - Pedido cadastrado
+2026-05-14T08:00:10.100000000 - Pedido cadastrado
+2026-05-14T08:00:10.200000000 - Pedido cadastrado
+2026-05-14T08:00:10.300000000 - Pedido cadastrado
+2026-05-14T08:00:10.400000000 - Pedido cadastrado2026-05-25T21:28:20.405653400 - Endereco cadastrado
+2026-05-25T21:28:23.224593200 - Pessoa cadastrada
+[INFO] 2026-05-25T21:36:09.429021700 - Endereco cadastrado
+[INFO] 2026-05-25T21:36:11.832803300 - Pessoa cadastrada
+[INFO] 2026-05-25T21:44:49.749712700 - Endereco cadastrado
+[INFO] 2026-05-25T21:44:51.911966 - Pessoa cadastrada
+[INFO] 2026-05-25T21:45:19.578457600 - Pessoa alterada
+[INFO] 2026-05-26T21:03:05.760447900 - Pessoa alterada
+[INFO] 2026-05-26T21:14:57.783189500 - Endereco cadastrado
+[INFO] 2026-05-26T21:15:01.271812300 - Pessoa cadastrada
+[INFO] 2026-05-26T21:16:38.859077500 - Pessoa alterada
+[INFO] 2026-05-26T21:17:25.162728500 - Endereco cadastrado
+[INFO] 2026-05-26T21:17:38.986570700 - Endereco cadastrado
+[INFO] 2026-05-26T21:17:40.076773900 - Pessoa cadastrada
+[INFO] 2026-05-26T21:20:03.039170400 - Produto cadastrado
+[INFO] 2026-05-26T21:29:34.220185 - Endereco cadastrado
+[INFO] 2026-05-26T21:29:38.011538400 - Pessoa cadastrada
+[INFO] 2026-05-26T21:31:44.768856600 - Produto cadastrado
+[INFO] 2026-05-27T01:23:18.167053 - Endereco cadastrado
+[INFO] 2026-05-27T01:23:19.613205800 - Pessoa cadastrada
+[INFO] 2026-05-29T20:36:25.183535300 - Endereco cadastrado
+[INFO] 2026-05-29T20:36:34.846528700 - Pessoa cadastrada
+[INFO] 2026-05-29T20:39:43.234233200 - Pedido cadastrado
+[INFO] 2026-05-29T20:44:23.106258900 - Produto cadastrado
+[INFO] 2026-05-31T13:49:27.289936600 - Endereco cadastrado
+[INFO] 2026-05-31T13:49:28.959055200 - Pessoa cadastrada: 321
+[INFO] 2026-05-31T13:51:52.850691 - Endereco cadastrado
+[INFO] 2026-05-31T13:51:54.540250300 - Pessoa cadastrada: 5

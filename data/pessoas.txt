@@ -1,0 +1,36 @@
+9;Patrícia Rocha;CLIENTE
+10;André Luiz Silva;CLIENTE
+11;Camila Xavier;AMBOS
+12;Diego Ferreira;CLIENTE
+13;Letícia Gomes;CLIENTE
+14;Felipe Barbosa;FORNECEDOR
+15;Gabriela Nunes;CLIENTE
+16;Hugo Viana;FORNECEDOR
+17;Isabela Martins;CLIENTE
+18;Jorge Carvalho;AMBOS
+19;Karina Lopes;CLIENTE
+20;Leonardo Pires;FORNECEDOR
+21;Mariana Costa;CLIENTE
+22;Natan Souza;CLIENTE
+23;Olívia Mendes;AMBOS
+24;Paulo Roberto;FORNECEDOR
+25;Renata Silveira;CLIENTE
+26;Sérgio Murilo;FORNECEDOR
+27;Tatiane Souza;CLIENTE
+28;Ulisses Guimarães;FORNECEDOR
+29;Vanessa Camargo;CLIENTE
+30;Wagner Moura;AMBOS
+31;Xavier Fernandes;FORNECEDOR
+32;Yara Amaral;CLIENTE
+33;Zeca Pagodinho;AMBOS
+34;Logística Expressa;FORNECEDOR
+35;Tech Solutions Ltda;FORNECEDOR
+36;Papelaria Central;FORNECEDOR
+37;Mercado do Bairro;AMBOS
+38;Construtora Aliança;FORNECEDOR
+
+50;Mauricio;AMBOS
+123;Vinciius Lima pereira;AMBOS
+1;Patrick Rodrigues;CLIENTE
+321;ssssd;CLIENTE
+5;...;AMBOS

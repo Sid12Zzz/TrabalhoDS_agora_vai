@@ -1,0 +1,24 @@
+=== SISTEMA DE GESTÃO ===
+
+1 - Cadastrar Pessoa
+2 - Listar Pessoas
+3 - Alterar Pessoa
+4 - Excluir Pessoa
+
+5 - Cadastrar Produto
+6 - Listar Produtos
+7 - Alterar Produto
+8 - Excluir Produto
+
+9  - Cadastrar Pedido
+10 - Listar Pedidos
+14 - Alterar Pedido
+15 - Excluir Pedido
+
+11 - Listar Endereços
+12 - Alterar Endereço
+13 - Excluir Endereço
+
+0 - Sair
+
+=========================

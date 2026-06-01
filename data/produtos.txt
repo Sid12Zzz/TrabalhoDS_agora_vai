@@ -1,0 +1,25 @@
+
+11;Smartphone iPhone 13;3500.0;4999.9;35
+12;Tablet Samsung S7;1800.0;2899.9;35
+13;Placa de Vídeo RTX 3060;1600.0;2499.9;35
+14;Processador Intel i7;1200.0;1899.9;35
+15;Impressora HP Laser;850.0;1249.9;36
+16;Toner Reserva HP;150.0;229.9;36
+17;Roteador Wi-Fi 6;280.0;449.9;35
+18;Cabo de Rede Cat6 (10m);12.0;25.0;36
+19;Smartwatch Apple;1600.0;2499.9;35
+20;Console PlayStation 5;3200.0;4299.9;35
+21;Controle DualSense;280.0;449.9;35
+22;Ar Condicionado Split;1400.0;2199.9;38
+23;Nobreak 1200VA;550.0;899.9;35
+24;Scanner de Mesa;400.0;749.9;36
+25;Projetor Full HD;2100.0;3199.9;35
+26;Mochila para Notebook;90.0;249.9;37
+27;HD Externo 2TB;280.0;459.9;35
+28;Luminária de Mesa LED;65.0;119.9;37
+29;Placa Mãe Asus;750.0;1199.9;35
+30;Suporte Monitor Articulado;180.0;299.9;37
+
+50;Mouse;999.9;1999.9;24
+70;Mouse Logitech;800.0;1800.0;24
+89;Playstation 6;2000.0;3500.0;24
