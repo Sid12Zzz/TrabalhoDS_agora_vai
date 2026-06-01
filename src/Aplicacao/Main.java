@@ -20,6 +20,9 @@ public class Main {
         if (opcao <= 10) {
             System.out.println("?");
         }
+        else {
+            System.out.println("!");
+        }
 
         while (opcao != 0) {
             System.out.print("\033[H\033[2J");
