@@ -13,7 +13,7 @@ public class Teclado {
     }
 
     public static String lerTexto(String msg) {
-        util.DesignUI.prompt(msg);
+        DesignUI.prompt(msg);
         return sc.nextLine().trim();
     }
 
@@ -21,21 +21,25 @@ public class Teclado {
         while (true) {
             String txt = lerTexto(msg);
             if (txt.length() >= min) return txt;
-            util.DesignUI.erro("O texto deve ter pelo menos " + min + " caracteres.");
+            DesignUI.erro("O texto deve ter pelo menos " + min + " caracteres.");
         }
     }
 
     public static String lerNome(String msg) {
-        return lerTextoMin(msg, 3);
+        while (true) {
+            String nome = lerTextoMin(msg, 3);
+            if (nome.matches(".*[a-zA-ZÀ-ÿ].*")) return nome;
+            DesignUI.erro("Nome inválido. Use pelo menos uma letra.");
+        }
     }
 
     public static int lerInt(String msg) {
         while (true) {
-            util.DesignUI.prompt(msg);
+            DesignUI.prompt(msg);
             try {
                 return Integer.parseInt(sc.nextLine().trim());
             } catch (NumberFormatException e) {
-                util.DesignUI.erro("Entrada inválida. Digite um número inteiro.");
+                DesignUI.erro("Entrada inválida. Digite um número inteiro.");
             }
         }
     }
@@ -44,22 +48,22 @@ public class Teclado {
         while (true) {
             int v = lerInt(msg);
             if (v > 0) return v;
-            util.DesignUI.erro("O valor deve ser maior que zero.");
+            DesignUI.erro("O valor deve ser maior que zero.");
         }
     }
 
     public static double lerDouble(String msg) {
         while (true) {
-            util.DesignUI.prompt(msg);
+            DesignUI.prompt(msg);
             try {
                 double v = Double.parseDouble(sc.nextLine().trim().replace(",", "."));
                 if (v < 0) {
-                    util.DesignUI.erro("O valor não pode ser negativo.");
+                    DesignUI.erro("O valor não pode ser negativo.");
                 } else {
                     return v;
                 }
             } catch (NumberFormatException e) {
-                util.DesignUI.erro("Entrada inválida. Digite um número decimal válido.");
+                DesignUI.erro("Entrada inválida. Digite um número decimal válido.");
             }
         }
     }
@@ -68,7 +72,7 @@ public class Teclado {
         while (true) {
             String cep = lerTexto(msg).replaceAll("[^0-9]", "");
             if (cep.length() == 8) return cep;
-            util.DesignUI.erro("CEP inválido. Digite exatamente 8 números.");
+            DesignUI.erro("CEP inválido. Digite exatamente 8 números.");
         }
     }
 
@@ -78,7 +82,7 @@ public class Teclado {
             for (String op : opcoes) {
                 if (op.toUpperCase().equals(lido)) return op;
             }
-            util.DesignUI.erro("Opção inválida.");
+            DesignUI.erro("Opção inválida.");
         }
     }
 }

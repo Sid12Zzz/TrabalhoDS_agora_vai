@@ -4,7 +4,7 @@ import Modelo.ItemPedido;
 import Modelo.Pedido;
 import Modelo.Pessoa;
 import Modelo.Produto;
-import util.GerenciadorLog;
+import Utilitario.GerenciadorLog;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

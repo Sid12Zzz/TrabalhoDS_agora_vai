@@ -1,4 +1,5 @@
-package util;
+package Utilitario;
+// resto do arquivo permanece igual
 
 import java.io.BufferedReader;
 import java.io.FileReader;

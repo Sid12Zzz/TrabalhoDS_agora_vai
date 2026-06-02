@@ -1,4 +1,5 @@
-package util;
+package Utilitario;
+// resto do arquivo permanece igual
 
 import java.io.FileWriter;
 import java.io.PrintWriter;

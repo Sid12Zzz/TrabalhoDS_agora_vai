@@ -1,7 +1,7 @@
 package repository;
 
 import Modelo.Pessoa;
-import util.GerenciadorLog;
+import Utilitario.GerenciadorLog;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

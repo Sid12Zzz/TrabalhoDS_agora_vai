@@ -2,6 +2,8 @@ package Aplicacao;
 
 import repository.*;
 import Utilitario.Teclado;
+import Utilitario.DesignUI;
+import Utilitario.GerenciadorMenu;
 
 public class Main {
 
@@ -17,33 +19,13 @@ public class Main {
         ControladorPedido pedidoCtrl = new ControladorPedido(pedRepo, pRepo, prodRepo, eRepo);
 
         int opcao = -1;
-        if (opcao <= 10) {
-            System.out.println("?");
-        }
-        else {
-            System.out.println("!");
-        }
-        if (opcao <= 10) {
-            System.out.println("?");
-        }
-        else {
-            System.out.println("!");
-        }
-
-        if (opcao <= 10) {
-            System.out.println("?");
-        }
-        else {
-            System.out.println("!");
-        }
-
 
         while (opcao != 0) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
-            util.DesignUI.cabecalho();
-            util.GerenciadorMenu.mostrarMenu();
-            util.DesignUI.rodape();
+            DesignUI.cabecalho();
+            GerenciadorMenu.mostrarMenu();
+            DesignUI.rodape();
 
             opcao = Teclado.lerInt("Selecione uma operação:");
 
@@ -64,12 +46,12 @@ public class Main {
                 case 14: pedidoCtrl.alterar(); break;
                 case 15: pedidoCtrl.excluir(); break;
                 case 0:
-                    util.DesignUI.info("Encerrando o sistema...");
+                    DesignUI.info("Encerrando o sistema...");
                     break;
                 default:
-                    util.DesignUI.erro("Opção inválida.");
+                    DesignUI.erro("Opção inválida.");
             }
-            if (opcao != 0) util.DesignUI.pausar();
+            if (opcao != 0) DesignUI.pausar();
         }
     }
 }

@@ -4,7 +4,7 @@ import Modelo.Endereco;
 import Modelo.Pessoa;
 import repository.RepositorioEndereco;
 import repository.RepositorioPessoa;
-import util.DesignUI;
+import Utilitario.DesignUI;
 import java.util.List;
 import Utilitario.Teclado;
 

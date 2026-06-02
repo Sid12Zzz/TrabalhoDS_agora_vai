@@ -5,7 +5,7 @@ import Modelo.Produto;
 import repository.RepositorioPedido;
 import repository.RepositorioPessoa;
 import repository.RepositorioProduto;
-import util.DesignUI;
+import Utilitario.DesignUI;
 import java.util.List;
 import Utilitario.Teclado;
 
