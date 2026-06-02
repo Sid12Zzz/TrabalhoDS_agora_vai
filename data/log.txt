@@ -63,3 +63,12 @@
 [INFO] 2026-06-02T17:46:30.526211100 - Endereco cadastrado
 [INFO] 2026-06-02T17:46:32.303364100 - Pessoa cadastrada: 333
 [INFO] 2026-06-02T17:47:17.253261700 - Pessoa alterada: 333
+[INFO] 2026-06-02T17:49:56.296160600 - Pessoa alterada: 333
+[INFO] 2026-06-02T17:50:11.174331700 - Pessoa excluída: 333
+[INFO] 2026-06-02T17:50:11.182375400 - Enderecos excluidos junto com pessoa 333
+[INFO] 2026-06-02T17:51:28.729192800 - Produto cadastrado: 666
+[INFO] 2026-06-02T17:52:18.011961400 - Produto alterado: 666
+[INFO] 2026-06-02T17:52:25.205185700 - Produto excluído: 666
+[INFO] 2026-06-02T17:54:37.469711800 - Pedido cadastrado: 666
+[INFO] 2026-06-02T18:29:16.113836500 - Endereco cadastrado
+[INFO] 2026-06-02T18:29:17.704767700 - Pessoa cadastrada: 77998

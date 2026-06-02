@@ -38,7 +38,7 @@ public class RepositorioEndereco {
         try (FileWriter fw = new FileWriter(ARQUIVO, true); PrintWriter pw = new PrintWriter(fw)) {
             pw.println(codigoPessoa + ";" + end.getCep() + ";" +
                     end.getLogradouro() + ";" + end.getNumero() + ";" +
-                    end.getComplemento() + ";" + end.getTipo());
+                    end.getComplemento() + ";" + end.getTipo().name());
             GerenciadorLog.registrar("Endereco cadastrado");
         } catch (Exception e) { throw new RuntimeException("Erro ao salvar endereço."); }
     }

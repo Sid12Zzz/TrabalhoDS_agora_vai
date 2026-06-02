@@ -1,16 +1,12 @@
 package Modelo;
 
-/**
- * Modelo: ENDEREÇO
- * Representa os dados de localização vinculados a uma Pessoa.
- */
 public class Endereco {
 
     private String cep;
     private String logradouro;
     private String numero;
     private String complemento;
-    private String tipo; // COMERCIAL, RESIDENCIAL, ENTREGA, CORRESPONDENCIA
+    private TipoEndereco tipo; // COMERCIAL, RESIDENCIAL, ENTREGA, CORRESPONDENCIA
 
     public Endereco() {}
 
@@ -19,7 +15,15 @@ public class Endereco {
         this.logradouro = formatar(logradouro);
         this.numero = formatar(numero);
         this.complemento = formatar(complemento);
-        this.tipo = formatar(tipo).toUpperCase();
+        this.tipo = TipoEndereco.fromString(tipo);
+    }
+
+    public Endereco(String cep, String logradouro, String numero, String complemento, TipoEndereco tipo) {
+        this.cep = formatar(cep);
+        this.logradouro = formatar(logradouro);
+        this.numero = formatar(numero);
+        this.complemento = formatar(complemento);
+        this.tipo = tipo;
     }
 
     public String getCep() { return cep; }
@@ -34,8 +38,9 @@ public class Endereco {
     public String getComplemento() { return complemento; }
     public void setComplemento(String c) { this.complemento = formatar(c); }
 
-    public String getTipo() { return tipo; }
-    public void setTipo(String t) { this.tipo = formatar(t).toUpperCase(); }
+    public TipoEndereco getTipo() { return tipo; }
+    public void setTipo(String t) { this.tipo = TipoEndereco.fromString(t); }
+    public void setTipo(TipoEndereco t) { this.tipo = t; }
 
     public String resumo() {
         return String.format("%s, %s (%s) - %s", logradouro, numero, complemento, cep);
@@ -47,6 +52,7 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return String.format("%s;%s;%s;%s;%s", cep, logradouro, numero, complemento, tipo);
+        return String.format("%s;%s;%s;%s;%s", cep, logradouro, numero, complemento,
+                tipo != null ? tipo.name() : "");
     }
 }
