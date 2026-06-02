@@ -20,6 +20,8 @@ public class Main {
 
         int opcao = -1;
 
+        int pushteste = 0;
+
         while (opcao != 0) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
