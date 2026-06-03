@@ -78,3 +78,14 @@
 [INFO] 2026-06-02T21:37:13.826150900 - Endereco alterado
 [INFO] 2026-06-02T21:38:50.358990700 - Endereco alterado
 [INFO] 2026-06-02T21:46:02.189165800 - Endereco excluído
+[INFO] 03/06/2026 02:31:40 - Endereco cadastrado
+[INFO] 03/06/2026 02:31:41 - Pessoa cadastrada: cod=100 nome=Vinicius Lima Pereira
+[INFO] 03/06/2026 02:32:18 - Pessoa alterada: cod=100 novoNome=Vinicius Lima Pereiro
+[INFO] 03/06/2026 02:32:37 - Pessoa alterada: cod=100 novoNome=Vinicius Lima Pereiro
+[INFO] 03/06/2026 02:32:46 - Pessoa excluída: cod=100
+[INFO] 03/06/2026 02:32:46 - Enderecos excluidos junto com pessoa 100
+[INFO] 03/06/2026 02:33:11 - Produto cadastrado: 100
+[INFO] 03/06/2026 02:33:51 - Produto alterado: 100
+[INFO] 03/06/2026 02:33:58 - Produto excluído: 100
+[INFO] 03/06/2026 02:39:25 - Endereco cadastrado
+[INFO] 03/06/2026 02:39:47 - Endereco alterado

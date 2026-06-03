@@ -18,7 +18,8 @@ public class RepositorioPessoa implements Repositorio<Pessoa>, Buscavel<Pessoa> 
             while ((linha = br.readLine()) != null) {
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
-                if (Integer.parseInt(d[0]) == codigo) return true;
+                if (d.length < 3) continue;
+                if (Integer.parseInt(d[0].trim()) == codigo) return true;
             }
         } catch (Exception ignored) {}
         return false;
@@ -31,8 +32,9 @@ public class RepositorioPessoa implements Repositorio<Pessoa>, Buscavel<Pessoa> 
             while ((linha = br.readLine()) != null) {
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
-                if (Integer.parseInt(d[0]) == codigoBusca)
-                    return new Pessoa(Integer.parseInt(d[0]), d[1], d[2]);
+                if (d.length < 3) continue;
+                if (Integer.parseInt(d[0].trim()) == codigoBusca)
+                    return new Pessoa(Integer.parseInt(d[0].trim()), d[1].trim(), d[2].trim());
             }
         } catch (Exception ignored) {}
         return null;
@@ -45,8 +47,9 @@ public class RepositorioPessoa implements Repositorio<Pessoa>, Buscavel<Pessoa> 
             while ((linha = br.readLine()) != null) {
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
-                if (d[1].toLowerCase().contains(filtro.toLowerCase())) {
-                    lista.add(new Pessoa(Integer.parseInt(d[0]), d[1], d[2]));
+                if (d.length < 3) continue;
+                if (d[1].trim().toLowerCase().contains(filtro.toLowerCase())) {
+                    lista.add(new Pessoa(Integer.parseInt(d[0].trim()), d[1].trim(), d[2].trim()));
                 }
             }
         } catch (Exception e) { throw new RuntimeException("Erro ao ler arquivo."); }
@@ -59,8 +62,8 @@ public class RepositorioPessoa implements Repositorio<Pessoa>, Buscavel<Pessoa> 
             throw new IllegalArgumentException("Já existe uma pessoa com o código " + pessoa.getCodigo());
         }
         try (FileWriter fw = new FileWriter(ARQUIVO, true); PrintWriter pw = new PrintWriter(fw)) {
-            pw.println(pessoa.getCodigo() + ";" + pessoa.getNome() + ";" + pessoa.getTipoPessoa());
-            GerenciadorLog.registrar("Pessoa cadastrada: " + pessoa.getCodigo());
+            pw.println(pessoa.getCodigo() + ";" + pessoa.getNome() + ";" + pessoa.getTipoPessoa().name());
+            GerenciadorLog.registrar("Pessoa cadastrada: cod=" + pessoa.getCodigo() + " nome=" + pessoa.getNome());
         } catch (Exception e) { throw new RuntimeException("Erro ao salvar pessoa."); }
     }
 
@@ -72,7 +75,8 @@ public class RepositorioPessoa implements Repositorio<Pessoa>, Buscavel<Pessoa> 
             while ((linha = br.readLine()) != null) {
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
-                lista.add(new Pessoa(Integer.parseInt(d[0]), d[1], d[2]));
+                if (d.length < 3) continue;
+                lista.add(new Pessoa(Integer.parseInt(d[0].trim()), d[1].trim(), d[2].trim()));
             }
         } catch (Exception e) { throw new RuntimeException("Erro ao listar pessoas."); }
         return lista;
@@ -90,7 +94,8 @@ public class RepositorioPessoa implements Repositorio<Pessoa>, Buscavel<Pessoa> 
             while ((linha = br.readLine()) != null) {
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
-                if (Integer.parseInt(d[0]) == codigoBusca) {
+                if (d.length < 3) { pw.println(linha); continue; }
+                if (Integer.parseInt(d[0].trim()) == codigoBusca) {
                     pw.println(codigoBusca + ";" + novoNome + ";" + novoTipo.toUpperCase());
                 } else {
                     pw.println(linha);
@@ -98,7 +103,7 @@ public class RepositorioPessoa implements Repositorio<Pessoa>, Buscavel<Pessoa> 
             }
         } catch (Exception e) { throw new RuntimeException("Erro ao alterar pessoa."); }
         orig.delete(); temp.renameTo(orig);
-        GerenciadorLog.registrar("Pessoa alterada: " + codigoBusca);
+        GerenciadorLog.registrar("Pessoa alterada: cod=" + codigoBusca + " novoNome=" + novoNome);
     }
 
     @Override
@@ -114,13 +119,15 @@ public class RepositorioPessoa implements Repositorio<Pessoa>, Buscavel<Pessoa> 
             while ((linha = br.readLine()) != null) {
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
-                if (Integer.parseInt(d[0]) != codigoBusca) pw.println(linha);
+                if (d.length < 1) continue;
+                if (Integer.parseInt(d[0].trim()) != codigoBusca) pw.println(linha);
             }
         } catch (Exception e) { throw new RuntimeException("Erro ao excluir pessoa."); }
         orig.delete(); temp.renameTo(orig);
-        GerenciadorLog.registrar("Pessoa excluída: " + codigoBusca);
+        GerenciadorLog.registrar("Pessoa excluída: cod=" + codigoBusca);
     }
 
+    /** Verifica se há pedidos vinculados ao código da pessoa (compara por código, não por nome). */
     public boolean pessoaTemPedido(int codigoPessoa) {
         try (BufferedReader br = new BufferedReader(new FileReader("./data/pedidos.txt"))) {
             String linha;
@@ -128,8 +135,10 @@ public class RepositorioPessoa implements Repositorio<Pessoa>, Buscavel<Pessoa> 
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
                 if (d.length < 2) continue;
-                Pessoa p = buscarPorCodigo(codigoPessoa);
-                if (p != null && d[1].equalsIgnoreCase(p.getNome())) return true;
+                // formato do pedido: numero;codCliente;cep;itens;total
+                try {
+                    if (Integer.parseInt(d[1].trim()) == codigoPessoa) return true;
+                } catch (NumberFormatException ignored) {}
             }
         } catch (Exception ignored) {}
         return false;
@@ -142,7 +151,7 @@ public class RepositorioPessoa implements Repositorio<Pessoa>, Buscavel<Pessoa> 
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
                 if (d.length < 5) continue;
-                if (Integer.parseInt(d[4]) == codigoPessoa) return true;
+                if (Integer.parseInt(d[4].trim()) == codigoPessoa) return true;
             }
         } catch (Exception ignored) {}
         return false;

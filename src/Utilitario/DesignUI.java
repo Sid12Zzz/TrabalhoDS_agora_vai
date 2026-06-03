@@ -9,10 +9,6 @@ import java.util.Locale;
  */
 public class DesignUI {
 
-    // ╔════════════════════════════════════════════════════════════╗
-    // ║  DESIGN SYSTEM — DEFINITIVE EDITION                        ║
-    // ╚════════════════════════════════════════════════════════════╝
-
     public static final String ESC = "\u001B[";
     public static final String RESET = ESC + "0m";
     public static final String BOLD = ESC + "1m";
@@ -36,12 +32,16 @@ public class DesignUI {
 
     public static final int W = 64;
     private static final String INDENT = " ";
-    private static final String ANSI_REGEX = "\u001B\\[[;\\d]*m";
+    private static final String ANSI_REGEX = "\u001B\\[[0-9;]*m";
     private static final String MARK = "✦";
 
-    // ╔════════════════════════════════════════════════════════════╗
-    // ║  COMPONENTES                                               ║
-    // ╚════════════════════════════════════════════════════════════╝
+    // ─── UTILITÁRIO DE MOEDA ───────────────────────────────────────
+    /** Formata double como "R$ 1.234,56" */
+    public static String formatarMoeda(double valor) {
+        return String.format(new java.util.Locale("pt", "BR"), "R$ %,.2f", valor);
+    }
+
+    // ─── COMPONENTES ──────────────────────────────────────────────
 
     public static void cabecalho() {
         println(AZURE_DEEP + "╔" + repeat("═", W) + "╗");
@@ -98,8 +98,8 @@ public class DesignUI {
         println(AZURE_DEEP + "┌─" + RESET + BOLD + AZURE_SKY + head + RESET + AZURE_DEEP + repeat("─", tracos) + "┐");
     }
 
-    public static void fecharCaixa() { println(AZURE_DEEP + "└" + repeat("─", W) + "┘"); }
-    public static void separadorCaixa() { println(AZURE_DEEP + "├" + repeat("─", W) + "┤"); }
+    public static void fecharCaixa()      { println(AZURE_DEEP + "└" + repeat("─", W) + "┘"); }
+    public static void separadorCaixa()   { println(AZURE_DEEP + "├" + repeat("─", W) + "┤"); }
     public static void linhaCaixa(String k, String v) {
         String linha = "  " + DIM + AZURE_SKY + left(k, 12) + RESET + " " + BRANCO_PURO + v;
         println(AZURE_DEEP + "│" + RESET + left(linha, W) + AZURE_DEEP + "│");
@@ -127,27 +127,20 @@ public class DesignUI {
         System.out.println(INDENT + AZURE_VIBRANTE + MARK + " " + RESET + BOLD + BRANCO_PURO + textoSeguro(m).toUpperCase() + RESET);
     }
 
-    /**
-     * Método de pausa com limpeza de buffer blindada.
-     */
     public static void pausar() {
         System.out.print(INDENT + TEXTO_SUBTIL + "  Pressione ENTER para continuar..." + RESET);
         try {
-            // Limpa qualquer resíduo do buffer de entrada de forma agressiva
-            while (System.in.available() > 0) {
-                System.in.read();
-            }
-            // Aguarda a nova entrada do usuário
+            while (System.in.available() > 0) System.in.read();
             System.in.read();
         } catch (Exception e) {}
     }
 
-    public static void espaco()    { System.out.println(); }
+    public static void espaco()        { System.out.println(); }
     public static void vazio(String m) { System.out.println(INDENT + TEXTO_SUBTIL + "○ " + textoSeguro(m) + RESET); }
 
     private static String[][] normalizar(String[][] i) { return i == null ? new String[0][] : i; }
-    private static String textoSeguro(String s) { return s == null ? "" : s; }
-    private static void println(String c) { System.out.println(INDENT + c + RESET); }
+    private static String textoSeguro(String s)        { return s == null ? "" : s; }
+    private static void println(String c)              { System.out.println(INDENT + c + RESET); }
     private static String center(String t, int l) {
         int v = visibleLength(t);
         int p = Math.max(0, l - v);

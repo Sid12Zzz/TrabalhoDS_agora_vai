@@ -11,7 +11,7 @@ public class GerenciadorMenu {
         String[][] pessoasItens  = new String[4][2];
         String[][] produtosItens = new String[4][2];
         String[][] pedidosItens  = new String[4][2];
-        String[][] endItens      = new String[3][2];
+        String[][] endItens      = new String[4][2];  // era 3, agora 4 (inclui Cadastrar Endereço)
 
         int pi = 0, pri = 0, pei = 0, ei = 0;
 
@@ -33,7 +33,7 @@ public class GerenciadorMenu {
                 if      (opcao >= 1  && opcao <= 4  && pi  < 4) { pessoasItens [pi++]  = new String[]{num, descr}; }
                 else if (opcao >= 5  && opcao <= 8  && pri < 4) { produtosItens[pri++] = new String[]{num, descr}; }
                 else if (opcao >= 9  && opcao <= 12 && pei < 4) { pedidosItens [pei++] = new String[]{num, descr}; }
-                else if (opcao >= 13 && opcao <= 15 && ei  < 3) { endItens     [ei++]  = new String[]{num, descr}; }
+                else if (opcao >= 13 && opcao <= 16 && ei  < 4) { endItens     [ei++]  = new String[]{num, descr}; }
             }
         } catch (Exception e) {
             DesignUI.erro("Erro ao carregar menus.txt: " + e.getMessage());
