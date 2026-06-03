@@ -29,44 +29,53 @@ public class ControladorPedido {
 
     public void cadastrar() {
         DesignUI.subtitulo("Abertura de Novo Pedido");
-        int numero = Utilitario.Teclado.lerIntPositivo("Número do Pedido:");
+        int numero = Teclado.lerIntPositivo("Número do Pedido:");
         if (pedRepo.numeroExiste(numero)) {
             DesignUI.erro("Pedido já existente.");
             return;
         }
 
-        int codCli = Utilitario.Teclado.lerIntPositivo("Código do Cliente:");
+        int codCli = Teclado.lerIntPositivo("Código do Cliente:");
         Pessoa cliente = pRepo.buscarPorCodigo(codCli);
         if (cliente == null || cliente.getTipoPessoa() == Modelo.TipoPessoa.FORNECEDOR) {
-            DesignUI.erro("Cliente inválido.");
+            DesignUI.erro("Cliente inválido ou não cadastrado.");
             return;
         }
 
         DesignUI.info("Cliente identificado: " + cliente.getNome());
-        String cep = Utilitario.Teclado.lerCep("CEP para entrega (apenas números):");
+        String cep = Teclado.lerCep("CEP para entrega (apenas números):");
 
-        try {
-            if(!eRepo.cepJaExiste(codCli, cep)) {
-                DesignUI.erro("CEP não cadastrado para este cliente.");
-                return;
-            }
-        } catch (RuntimeException e) {
-            DesignUI.erro("Erro ao validar endereço."); return;
+        if (!eRepo.cepJaExiste(codCli, cep)) {
+            DesignUI.erro("CEP não cadastrado para este cliente.");
+            return;
         }
 
         Pedido pedido = new Pedido(numero, cliente, cep);
-        int itensQtd  = Utilitario.Teclado.lerIntPositivo("Quantidade de itens diferentes:");
+
+        // BUG CORRIGIDO: loop garante pelo menos 1 item válido
+        int itensQtd = Teclado.lerIntPositivo("Quantidade de itens diferentes:");
+        int itensAdicionados = 0;
 
         for (int i = 0; i < itensQtd; i++) {
-            int pCod  = Utilitario.Teclado.lerIntPositivo("Cód. Produto " + (i + 1) + ":");
+            int pCod  = Teclado.lerIntPositivo("Cód. Produto " + (i + 1) + ":");
             Produto p = prodRepo.buscarPorCodigo(pCod);
             if (p != null) {
-                int q = Utilitario.Teclado.lerIntPositivo("Qtd:");
+                int q = Teclado.lerIntPositivo("Quantidade:");
                 pedido.adicionarItem(new ItemPedido(p, q));
+                itensAdicionados++;
+                DesignUI.info(p.getDescricao() + " — " + DesignUI.formatarMoeda(p.getPrecoVenda()) + " x " + q);
             } else {
-                DesignUI.erro("Produto não encontrado.");
+                DesignUI.erro("Produto não encontrado. Item ignorado.");
             }
         }
+
+        // BUG CORRIGIDO: bloqueia pedido sem itens válidos
+        if (itensAdicionados == 0) {
+            DesignUI.erro("Nenhum item válido adicionado. Pedido cancelado.");
+            return;
+        }
+
+        DesignUI.info("Total do pedido: " + DesignUI.formatarMoeda(pedido.getTotal()));
 
         try {
             pedRepo.salvar(pedido);
@@ -77,37 +86,39 @@ public class ControladorPedido {
     }
 
     private void desenharPedido(Pedido pedido) {
-        // CORREÇÃO AQUI: getNumeroPedido()
         DesignUI.abrirCaixa("Pedido nº " + pedido.getNumeroPedido());
-        DesignUI.linhaCaixa("Cliente ", pedido.getCliente().getNome());
+        DesignUI.linhaCaixa("Cliente ", pedido.getCliente().getNome()
+                + " (cód. " + pedido.getCliente().getCodigo() + ")");
         DesignUI.linhaCaixa("Entrega ", pedido.getEnderecoEntrega());
         DesignUI.separadorCaixa();
 
         for (ItemPedido item : pedido.getItens()) {
-            String nomeProduto = item.getProduto().getDescricao();
-            DesignUI.linhaCaixa(nomeProduto, "qtd: " + item.getQuantidade() + "  |  R$ " + item.getSubtotal());
+            DesignUI.linhaCaixa(item.getProduto().getDescricao(),
+                    "qtd: " + item.getQuantidade()
+                            + "  |  " + DesignUI.formatarMoeda(item.getSubtotal()));
         }
 
         DesignUI.separadorCaixa();
-        DesignUI.linhaCaixa("TOTAL   ", "R$ " + pedido.getTotal());
+        DesignUI.linhaCaixa("TOTAL   ", DesignUI.formatarMoeda(pedido.getTotal()));
         DesignUI.fecharCaixa();
         DesignUI.espaco();
     }
 
     public void listar() {
         DesignUI.subtitulo("Listagem de Pedidos");
-        String modo = Utilitario.Teclado.lerOpcao("Buscar por (NUMERO / CLIENTE / TODOS):", new String[]{"NUMERO", "CLIENTE", "TODOS"});
+        String modo = Teclado.lerOpcao("Buscar por (NUMERO / CLIENTE / TODOS):",
+                new String[]{"NUMERO", "CLIENTE", "TODOS"});
 
         try {
             if (modo.equals("NUMERO")) {
-                int num = Utilitario.Teclado.lerIntPositivo("Número do pedido:");
+                int num = Teclado.lerIntPositivo("Número do pedido:");
                 Pedido p = pedRepo.buscarPorNumero(num);
                 if (p != null) desenharPedido(p);
                 else DesignUI.vazio("Pedido não encontrado.");
 
             } else if (modo.equals("CLIENTE")) {
                 DesignUI.prompt("Nome do cliente:");
-                String filtro = Utilitario.Teclado.lerLinha();
+                String filtro = Teclado.lerLinha();
                 List<Pedido> lista = pedRepo.buscarPorCliente(filtro);
                 if (lista.isEmpty()) DesignUI.vazio("Nenhum pedido para este cliente.");
                 else for (Pedido p : lista) desenharPedido(p);
@@ -123,17 +134,24 @@ public class ControladorPedido {
     }
 
     public void alterar() {
-        DesignUI.subtitulo("Alterar Entrega do Pedido");
-        int numero = Utilitario.Teclado.lerIntPositivo("Número do Pedido:");
+        DesignUI.subtitulo("Alterar Endereço de Entrega do Pedido");
+        int numero = Teclado.lerIntPositivo("Número do Pedido:");
 
-        // 1. Validação imediata: verifica se o pedido existe antes de prosseguir
         if (!pedRepo.numeroExiste(numero)) {
             DesignUI.erro("Pedido não encontrado.");
-            return; // Encerra a operação na hora
+            return;
         }
 
-        // 2. Só pede o CEP se o pedido for válido
-        String novoCep = Utilitario.Teclado.lerCep("Novo CEP de entrega (apenas números):");
+        // BUG CORRIGIDO: valida CEP contra endereços cadastrados do cliente
+        Pedido pedido = pedRepo.buscarPorNumero(numero);
+        int codCliente = pedido.getCliente().getCodigo();
+
+        String novoCep = Teclado.lerCep("Novo CEP de entrega (apenas números):");
+
+        if (!eRepo.cepJaExiste(codCliente, novoCep)) {
+            DesignUI.erro("O CEP informado não está cadastrado para o cliente deste pedido.");
+            return;
+        }
 
         try {
             pedRepo.alterarEntrega(numero, novoCep);
@@ -145,15 +163,14 @@ public class ControladorPedido {
 
     public void excluir() {
         DesignUI.subtitulo("Excluir Pedido");
-        int numero = Utilitario.Teclado.lerIntPositivo("Número do Pedido:");
+        int numero = Teclado.lerIntPositivo("Número do Pedido:");
 
-        // Validação imediata adicionada aqui também
         if (!pedRepo.numeroExiste(numero)) {
             DesignUI.erro("Pedido não encontrado.");
             return;
         }
 
-        if (Utilitario.Teclado.lerOpcao("Confirmar exclusão? (S/N):", new String[]{"S", "N"}).equals("S")) {
+        if (Teclado.lerOpcao("Confirmar exclusão? (S/N):", new String[]{"S", "N"}).equals("S")) {
             try {
                 pedRepo.excluir(numero);
                 DesignUI.sucesso("Pedido apagado do sistema.");

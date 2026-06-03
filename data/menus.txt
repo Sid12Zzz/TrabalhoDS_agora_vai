@@ -16,8 +16,9 @@
 12 - Excluir Pedido
 
 13 - Listar Endereços
-14 - Alterar Endereço
-15 - Excluir Endereço
+14 - Cadastrar Endereço
+15 - Alterar Endereço
+16 - Excluir Endereço
 
 0 - Sair
 
