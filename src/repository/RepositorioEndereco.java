@@ -11,6 +11,11 @@ public class RepositorioEndereco {
     private static final String ARQUIVO = "./data/enderecos.txt";
     private static final String TEMP    = "./data/temp_enderecos.txt";
 
+    // Normaliza o CEP removendo qualquer caractere que não seja número
+    private String normalizarCep(String cep) {
+        return cep == null ? "" : cep.replaceAll("[^0-9]", "");
+    }
+
     public boolean cepJaExiste(int codigoPessoa, String cep) {
         try (BufferedReader br = new BufferedReader(new FileReader(ARQUIVO))) {
             String linha;
@@ -18,7 +23,7 @@ public class RepositorioEndereco {
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
                 if (d.length < 6) continue;
-                if (Integer.parseInt(d[0]) == codigoPessoa && d[1].equalsIgnoreCase(cep))
+                if (Integer.parseInt(d[0]) == codigoPessoa && normalizarCep(d[1]).equalsIgnoreCase(normalizarCep(cep)))
                     return true;
             }
         } catch (Exception ignored) {}
@@ -36,7 +41,7 @@ public class RepositorioEndereco {
             throw new IllegalArgumentException("Essa pessoa já possui um endereço com o CEP " + end.getCep());
         }
         try (FileWriter fw = new FileWriter(ARQUIVO, true); PrintWriter pw = new PrintWriter(fw)) {
-            pw.println(codigoPessoa + ";" + end.getCep() + ";" +
+            pw.println(codigoPessoa + ";" + normalizarCep(end.getCep()) + ";" +
                     end.getLogradouro() + ";" + end.getNumero() + ";" +
                     end.getComplemento() + ";" + end.getTipo().name());
             GerenciadorLog.registrar("Endereco cadastrado");
@@ -71,8 +76,8 @@ public class RepositorioEndereco {
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
                 if (d.length < 6) { pw.println(linha); continue; }
-                if (Integer.parseInt(d[0]) == codigoPessoa && d[1].equals(cepBusca)) {
-                    pw.println(codigoPessoa + ";" + cepBusca + ";" + novoLogradouro + ";" +
+                if (Integer.parseInt(d[0]) == codigoPessoa && normalizarCep(d[1]).equals(normalizarCep(cepBusca))) {
+                    pw.println(codigoPessoa + ";" + normalizarCep(cepBusca) + ";" + novoLogradouro + ";" +
                             novoNumero + ";" + novoComplemento + ";" + novoTipo.toUpperCase());
                 } else {
                     pw.println(linha);
@@ -96,7 +101,7 @@ public class RepositorioEndereco {
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
                 if (d.length < 6) { pw.println(linha); continue; }
-                if (!(Integer.parseInt(d[0]) == codigoPessoa && d[1].equals(cepBusca))) {
+                if (!(Integer.parseInt(d[0]) == codigoPessoa && normalizarCep(d[1]).equals(normalizarCep(cepBusca)))) {
                     pw.println(linha);
                 }
             }

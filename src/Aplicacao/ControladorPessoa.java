@@ -129,8 +129,21 @@ public class ControladorPessoa {
 
     public void alterarEndereco() {
         DesignUI.subtitulo("Alterar Endereço");
-        int cod    = Utilitario.Teclado.lerIntPositivo("Cód. Pessoa:");
-        String cep = Utilitario.Teclado.lerCep("CEP (apenas números):");
+        int cod = Utilitario.Teclado.lerIntPositivo("Cód. Pessoa:");
+
+        if (!pRepo.codigoExiste(cod)) {
+            DesignUI.erro("Pessoa com código " + cod + " não encontrada.");
+            return;
+        }
+
+        String cep;
+        while (true) {
+            cep = Utilitario.Teclado.lerCep("CEP do endereço a alterar (apenas números):");
+            if (eRepo.cepJaExiste(cod, cep)) {
+                break;
+            }
+            DesignUI.erro("Esta pessoa não possui endereço com o CEP " + cep + ". Tente novamente.");
+        }
 
         try {
             String log  = Utilitario.Teclado.lerTextoMin("Novo Logradouro:", 3);
@@ -140,7 +153,7 @@ public class ControladorPessoa {
 
             eRepo.alterar(cod, cep, log, num, comp, tipo);
             DesignUI.sucesso("Endereço alterado com sucesso.");
-        } catch ( RuntimeException e) {
+        } catch (RuntimeException e) {
             DesignUI.erro(e.getMessage());
         }
     }

@@ -75,3 +75,6 @@
 [INFO] 2026-06-02T21:03:16.628148500 - Pedido alterado: 6
 [INFO] 2026-06-02T21:03:37.208896800 - Pedido alterado: 7
 [INFO] 2026-06-02T21:03:53.698130100 - Pedido excluído: 7
+[INFO] 2026-06-02T21:37:13.826150900 - Endereco alterado
+[INFO] 2026-06-02T21:38:50.358990700 - Endereco alterado
+[INFO] 2026-06-02T21:46:02.189165800 - Endereco excluído
