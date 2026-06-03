@@ -72,3 +72,6 @@
 [INFO] 2026-06-02T17:54:37.469711800 - Pedido cadastrado: 666
 [INFO] 2026-06-02T18:29:16.113836500 - Endereco cadastrado
 [INFO] 2026-06-02T18:29:17.704767700 - Pessoa cadastrada: 77998
+[INFO] 2026-06-02T21:03:16.628148500 - Pedido alterado: 6
+[INFO] 2026-06-02T21:03:37.208896800 - Pedido alterado: 7
+[INFO] 2026-06-02T21:03:53.698130100 - Pedido excluído: 7

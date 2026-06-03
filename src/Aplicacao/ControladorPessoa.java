@@ -136,7 +136,7 @@ public class ControladorPessoa {
             String log  = Utilitario.Teclado.lerTextoMin("Novo Logradouro:", 3);
             String num  = Utilitario.Teclado.lerTexto("Novo Número:");
             String comp = Utilitario.Teclado.lerTexto("Novo Complemento:");
-            String tipo = Utilitario.Teclado.lerOpcao("Novo Tipo:", new String[]{"COMERCIAL", "RESIDENCIAL", "ENTREGA", "CORRESPONDENCIA"});
+            String tipo = Utilitario.Teclado.lerOpcao("Novo Tipo: COMERCIAL, RESIDENCIAL, ENTREGA, CORRESPONDENCIA", new String[]{"COMERCIAL", "RESIDENCIAL", "ENTREGA", "CORRESPONDENCIA"});
 
             eRepo.alterar(cod, cep, log, num, comp, tipo);
             DesignUI.sucesso("Endereço alterado com sucesso.");

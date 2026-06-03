@@ -125,7 +125,16 @@ public class ControladorPedido {
     public void alterar() {
         DesignUI.subtitulo("Alterar Entrega do Pedido");
         int numero = Utilitario.Teclado.lerIntPositivo("Número do Pedido:");
+
+        // 1. Validação imediata: verifica se o pedido existe antes de prosseguir
+        if (!pedRepo.numeroExiste(numero)) {
+            DesignUI.erro("Pedido não encontrado.");
+            return; // Encerra a operação na hora
+        }
+
+        // 2. Só pede o CEP se o pedido for válido
         String novoCep = Utilitario.Teclado.lerCep("Novo CEP de entrega (apenas números):");
+
         try {
             pedRepo.alterarEntrega(numero, novoCep);
             DesignUI.sucesso("Endereço de entrega atualizado.");
@@ -137,6 +146,12 @@ public class ControladorPedido {
     public void excluir() {
         DesignUI.subtitulo("Excluir Pedido");
         int numero = Utilitario.Teclado.lerIntPositivo("Número do Pedido:");
+
+        // Validação imediata adicionada aqui também
+        if (!pedRepo.numeroExiste(numero)) {
+            DesignUI.erro("Pedido não encontrado.");
+            return;
+        }
 
         if (Utilitario.Teclado.lerOpcao("Confirmar exclusão? (S/N):", new String[]{"S", "N"}).equals("S")) {
             try {
