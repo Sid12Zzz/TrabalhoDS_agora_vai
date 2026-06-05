@@ -89,3 +89,4 @@
 [INFO] 03/06/2026 02:33:58 - Produto excluído: 100
 [INFO] 03/06/2026 02:39:25 - Endereco cadastrado
 [INFO] 03/06/2026 02:39:47 - Endereco alterado
+[INFO] 05/06/2026 18:00:14 - Pessoa alterada: cod=1 novoNome=Ralfe Antonio

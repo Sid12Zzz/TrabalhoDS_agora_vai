@@ -43,16 +43,19 @@ public class ControladorPedido {
         }
 
         DesignUI.info("Cliente identificado: " + cliente.getNome());
-        String cep = Teclado.lerCep("CEP para entrega (apenas números):");
 
-        if (!eRepo.cepJaExiste(codCli, cep)) {
-            DesignUI.erro("CEP não cadastrado para este cliente.");
-            return;
+        // BUG 1 CORRIGIDO: loop até acertar um CEP válido do cliente
+        String cep;
+        while (true) {
+            cep = Teclado.lerCep("CEP para entrega (apenas números):");
+            if (eRepo.cepJaExiste(codCli, cep)) {
+                break;
+            }
+            DesignUI.erro("CEP não cadastrado para este cliente. Tente novamente.");
         }
 
         Pedido pedido = new Pedido(numero, cliente, cep);
 
-        // BUG CORRIGIDO: loop garante pelo menos 1 item válido
         int itensQtd = Teclado.lerIntPositivo("Quantidade de itens diferentes:");
         int itensAdicionados = 0;
 
@@ -69,7 +72,6 @@ public class ControladorPedido {
             }
         }
 
-        // BUG CORRIGIDO: bloqueia pedido sem itens válidos
         if (itensAdicionados == 0) {
             DesignUI.erro("Nenhum item válido adicionado. Pedido cancelado.");
             return;
@@ -142,15 +144,18 @@ public class ControladorPedido {
             return;
         }
 
-        // BUG CORRIGIDO: valida CEP contra endereços cadastrados do cliente
         Pedido pedido = pedRepo.buscarPorNumero(numero);
         int codCliente = pedido.getCliente().getCodigo();
+        DesignUI.info("Pedido de: " + pedido.getCliente().getNome());
 
-        String novoCep = Teclado.lerCep("Novo CEP de entrega (apenas números):");
-
-        if (!eRepo.cepJaExiste(codCliente, novoCep)) {
-            DesignUI.erro("O CEP informado não está cadastrado para o cliente deste pedido.");
-            return;
+        // BUG 2 CORRIGIDO: loop até informar um CEP válido do cliente
+        String novoCep;
+        while (true) {
+            novoCep = Teclado.lerCep("Novo CEP de entrega (apenas números):");
+            if (eRepo.cepJaExiste(codCliente, novoCep)) {
+                break;
+            }
+            DesignUI.erro("CEP não cadastrado para este cliente. Tente novamente.");
         }
 
         try {

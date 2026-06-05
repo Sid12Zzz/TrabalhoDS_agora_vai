@@ -30,7 +30,7 @@
 38;Construtora Aliança;FORNECEDOR
 50;Mauricio;AMBOS
 123;Vinciius Lima pereira;AMBOS
-1;Patrick Rodrigues;CLIENTE
+1;Ralfe Antonio;CLIENTE
 321;ssssd;CLIENTE
 5;...;AMBOS
 77998;lorraine vecanani;AMBOS
