@@ -36,11 +36,18 @@ public class ControladorPedido {
 
         DesignUI.info("Cliente identificado: " + cliente.getNome());
 
-        String cep;
+        String cep = null;
         while (true) {
-            cep = Teclado.lerCep("CEP para entrega (apenas números):");
-            if (eRepo.cepJaExiste(codCli, cep)) break;
-            DesignUI.erro("CEP não cadastrado para este cliente. Tente novamente.");
+            String entrada = Teclado.lerCep("CEP para entrega (apenas números ou 0 para cancelar):");
+            if (entrada.equals("0")) {
+                DesignUI.info("Operação cancelada.");
+                return;
+            }
+            if (eRepo.cepJaExiste(codCli, entrada)) {
+                cep = entrada;
+                break;
+            }
+            DesignUI.erro("CEP não cadastrado para este cliente. Tente novamente ou digite 0 para cancelar.");
         }
 
         Pedido pedido = new Pedido(numero, cliente, cep);
@@ -137,11 +144,18 @@ public class ControladorPedido {
         int codCliente = pedido.getCliente().getCodigo();
         DesignUI.info("Pedido de: " + pedido.getCliente().getNome());
 
-        String novoCep;
+        String novoCep = null;
         while (true) {
-            novoCep = Teclado.lerCep("Novo CEP de entrega (apenas números):");
-            if (eRepo.cepJaExiste(codCliente, novoCep)) break;
-            DesignUI.erro("CEP não cadastrado para este cliente. Tente novamente.");
+            String entrada = Teclado.lerCep("Novo CEP de entrega (apenas números ou 0 para cancelar):");
+            if (entrada.equals("0")) {
+                DesignUI.info("Operação cancelada.");
+                return;
+            }
+            if (eRepo.cepJaExiste(codCliente, entrada)) {
+                novoCep = entrada;
+                break;
+            }
+            DesignUI.erro("CEP não cadastrado para este cliente. Tente novamente ou digite 0 para cancelar.");
         }
 
         try {

@@ -8,6 +8,7 @@ import Utilitario.GerenciadorLog;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Formato da linha no arquivo pedidos.txt:
@@ -86,7 +87,7 @@ public class RepositorioPedido implements Repositorio<Pedido> {
                 ItemPedido item = pedido.getItens().get(i);
                 strItens.append(item.getProduto().getCodigo())
                         .append(":").append(item.getQuantidade())
-                        .append(":").append(String.format("%.2f", item.getSubtotal()));
+                        .append(":").append(String.format(Locale.US, "%.2f", item.getSubtotal()));
                 if (i < pedido.getItens().size() - 1) strItens.append("|");
             }
             pw.println(pedido.getNumeroPedido() + ";" +
@@ -94,7 +95,7 @@ public class RepositorioPedido implements Repositorio<Pedido> {
                     pedido.getCliente().getNome() + ";" +
                     pedido.getEnderecoEntrega() + ";" +
                     strItens + ";" +
-                    String.format("%.2f", pedido.getTotal()));
+                    String.format(Locale.US, "%.2f", pedido.getTotal()));
             GerenciadorLog.registrar("Pedido cadastrado: num=" + pedido.getNumeroPedido()
                     + " cliente=cod" + pedido.getCliente().getCodigo());
         } catch (IOException e) {
@@ -136,7 +137,7 @@ public class RepositorioPedido implements Repositorio<Pedido> {
                         try {
                             codProduto = Integer.parseInt(p[0].trim());
                             qtd        = Integer.parseInt(p[1].trim());
-                            subtotal   = Double.parseDouble(p[2].trim());
+                            subtotal   = Double.parseDouble(p[2].trim().replace(",", "."));
                         } catch (NumberFormatException e) { continue; }
 
                         Produto produto = null;

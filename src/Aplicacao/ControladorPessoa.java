@@ -201,11 +201,18 @@ public class ControladorPessoa {
             return;
         }
 
-        String cep;
+        String cep = null;
         while (true) {
-            cep = Teclado.lerCep("CEP do endereço a alterar (apenas números):");
-            if (eRepo.cepJaExiste(cod, cep)) break;
-            DesignUI.erro("Esta pessoa não possui endereço com o CEP " + cep + ". Tente novamente.");
+            String entrada = Teclado.lerCep("CEP do endereço a alterar (apenas números ou 0 para cancelar):");
+            if (entrada.equals("0")) {
+                DesignUI.info("Operação cancelada.");
+                return;
+            }
+            if (eRepo.cepJaExiste(cod, entrada)) {
+                cep = entrada;
+                break;
+            }
+            DesignUI.erro("Esta pessoa não possui endereço com o CEP " + entrada + ". Tente novamente ou digite 0 para cancelar.");
         }
 
         try {

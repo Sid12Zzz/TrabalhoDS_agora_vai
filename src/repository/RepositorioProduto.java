@@ -5,6 +5,7 @@ import Utilitario.GerenciadorLog;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class RepositorioProduto implements Repositorio<Produto>, Buscavel<Produto> {
 
@@ -45,7 +46,8 @@ public class RepositorioProduto implements Repositorio<Produto>, Buscavel<Produt
                 String[] d = linha.split(";");
                 if (Integer.parseInt(d[0]) == codigoBusca)
                     return new Produto(Integer.parseInt(d[0]), d[1],
-                            Double.parseDouble(d[2]), Double.parseDouble(d[3]),
+                            Double.parseDouble(d[2].replace(",", ".")),
+                            Double.parseDouble(d[3].replace(",", ".")),
                             Integer.parseInt(d[4]));
             }
         } catch (Exception ignored) {}
@@ -61,7 +63,8 @@ public class RepositorioProduto implements Repositorio<Produto>, Buscavel<Produt
                 String[] d = linha.split(";");
                 if (d[1].toLowerCase().contains(filtro.toLowerCase())) {
                     lista.add(new Produto(Integer.parseInt(d[0]), d[1],
-                            Double.parseDouble(d[2]), Double.parseDouble(d[3]),
+                            Double.parseDouble(d[2].replace(",", ".")),
+                            Double.parseDouble(d[3].replace(",", ".")),
                             Integer.parseInt(d[4])));
                 }
             }
@@ -82,7 +85,8 @@ public class RepositorioProduto implements Repositorio<Produto>, Buscavel<Produt
         }
         try (FileWriter fw = new FileWriter(ARQUIVO, true); PrintWriter pw = new PrintWriter(fw)) {
             pw.println(produto.getCodigo() + ";" + produto.getDescricao() + ";" +
-                    produto.getCusto() + ";" + produto.getPrecoVenda() + ";" +
+                    String.format(Locale.US, "%.2f", produto.getCusto()) + ";" +
+                    String.format(Locale.US, "%.2f", produto.getPrecoVenda()) + ";" +
                     produto.getCodigoFornecedor());
             GerenciadorLog.registrar("Produto cadastrado: " + produto.getCodigo());
         } catch (Exception e) { throw new RuntimeException("Erro ao salvar produto."); }
@@ -97,7 +101,8 @@ public class RepositorioProduto implements Repositorio<Produto>, Buscavel<Produt
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
                 lista.add(new Produto(Integer.parseInt(d[0]), d[1],
-                        Double.parseDouble(d[2]), Double.parseDouble(d[3]),
+                        Double.parseDouble(d[2].replace(",", ".")),
+                        Double.parseDouble(d[3].replace(",", ".")),
                         Integer.parseInt(d[4])));
             }
         } catch (Exception e) { throw new RuntimeException("Erro ao listar produtos."); }
@@ -117,7 +122,9 @@ public class RepositorioProduto implements Repositorio<Produto>, Buscavel<Produt
                 if (linha.trim().isEmpty()) continue;
                 String[] d = linha.split(";");
                 if (Integer.parseInt(d[0]) == codigoBusca) {
-                    pw.println(codigoBusca + ";" + novaDesc + ";" + novoCusto + ";" + novoPreco + ";" + novoForn);
+                    pw.println(codigoBusca + ";" + novaDesc + ";" +
+                            String.format(Locale.US, "%.2f", novoCusto) + ";" +
+                            String.format(Locale.US, "%.2f", novoPreco) + ";" + novoForn);
                 } else {
                     pw.println(linha);
                 }
