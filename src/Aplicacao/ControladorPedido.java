@@ -68,8 +68,8 @@ public class ControladorPedido {
             }
         }
 
-        if (itensAdicionados == 0) {
-            DesignUI.erro("Nenhum item válido adicionado. Pedido cancelado.");
+        if (!pedido.isValido()) {
+            DesignUI.erro(pedido.getMensagemErro());
             return;
         }
 

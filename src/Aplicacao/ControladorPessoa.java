@@ -25,7 +25,13 @@ public class ControladorPessoa {
         String nome = Teclado.lerNome("Nome Completo:");
         String tipo = Teclado.lerOpcao("Vínculo (CLIENTE / FORNECEDOR / AMBOS):",
                 new String[]{"CLIENTE", "FORNECEDOR", "AMBOS"});
+
         Pessoa pessoa = new Pessoa(codigo, nome, tipo);
+
+        if (!pessoa.isValido()) {
+            DesignUI.erro(pessoa.getMensagemErro());
+            return;
+        }
 
         String continuar = "S";
         while (continuar.equals("S")) {
@@ -95,6 +101,13 @@ public class ControladorPessoa {
         String nome = Teclado.lerNome("Novo nome:");
         String tipo = Teclado.lerOpcao("Novo vínculo (CLIENTE / FORNECEDOR / AMBOS):",
                 new String[]{"CLIENTE", "FORNECEDOR", "AMBOS"});
+
+        Pessoa pessoa = new Pessoa(codigo, nome, tipo);
+
+        if (!pessoa.isValido()) {
+            DesignUI.erro(pessoa.getMensagemErro());
+            return;
+        }
 
         try {
             pRepo.alterar(codigo, nome, tipo);

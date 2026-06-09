@@ -35,11 +35,18 @@ public class ControladorProduto {
             return;
         }
 
+        Produto produto = new Produto(codigo, desc, custo, venda, fornCod);
+
+        if (!produto.isValido()) {
+            DesignUI.erro(produto.getMensagemErro());
+            return;
+        }
+
         if (venda < custo) DesignUI.aviso("Atenção: Preço de venda abaixo do custo.");
         if (venda == 0)    DesignUI.aviso("Atenção: Preço de venda definido como zero.");
 
         try {
-            prodRepo.salvar(new Produto(codigo, desc, custo, venda, fornCod));
+            prodRepo.salvar(produto);
             DesignUI.sucesso("Produto cadastrado com sucesso!");
         } catch (RuntimeException e) {
             DesignUI.erro(e.getMessage());
@@ -93,6 +100,13 @@ public class ControladorProduto {
         Pessoa forn = pRepo.buscarPorCodigo(fornCod);
         if (forn == null || forn.getTipoPessoa() == Modelo.TipoPessoa.CLIENTE) {
             DesignUI.erro("Fornecedor inválido ou não cadastrado.");
+            return;
+        }
+
+        Produto produto = new Produto(codigo, desc, custo, venda, fornCod);
+
+        if (!produto.isValido()) {
+            DesignUI.erro(produto.getMensagemErro());
             return;
         }
 
